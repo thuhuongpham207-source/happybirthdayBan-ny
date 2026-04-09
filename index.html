@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>You & Me on 11/04? 😘</title>
+
+<style>
+  body {
+    margin: 0;
+    background: linear-gradient(to right, #fbc2eb, #fcd6e7);
+    font-family: Arial;
+    overflow: hidden;
+  }
+
+  .container {
+    position: relative;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  h1 {
+    color: white;
+    font-size: 42px;
+    margin-top: 80px;
+  }
+
+  #text {
+    color: white;
+    font-size: 24px;
+    margin-top: 8px;
+  }
+
+  #text2 {
+    color: white;
+    font-size: 22px;
+    margin-top: 10px;
+    opacity: 0;
+  }
+
+  img {
+  width: 250px;
+  margin: 20px auto 0;   /* 👈 auto để căn giữa */
+  display: none;
+  animation: bounce 1.5s infinite;
+}
+
+  .buttons {
+    margin-top: 50px;
+  }
+
+  button {
+    padding: 12px 25px;
+    font-size: 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  #yes {
+    background: #ff6b81;
+    color: white;
+  }
+
+  #yes:hover {
+    transform: scale(1.1);
+  }
+
+  #no {
+    background: white;
+    color: #ff6b81;
+    position: absolute;
+  }
+
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  @keyframes glow {
+    0% { transform: scale(1); text-shadow: 0 0 5px #ff9bb3; }
+    50% { transform: scale(1.1); text-shadow: 0 0 20px #ff6b81; }
+    100% { transform: scale(1); text-shadow: 0 0 5px #ff9bb3; }
+  }
+
+  .success {
+    animation: glow 1s ease infinite;
+  }
+
+  .heart {
+    position: fixed;
+    top: -10px;
+    color: white;
+    font-size: 20px;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    to { transform: translateY(100vh); }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 id="question">Do you wanna go out with meee? 😉</h1>
+
+<div id="text"></div> <!-- 👈 Mission nằm ngay dưới -->
+
+<div class="buttons">
+  <button id="yes" onclick="accept()">Yes 😍</button>
+  <button id="no">No 🙂‍↔️</button>
+</div>
+
+<img id="gif" src="yeah.gif">
+<div id="text2"></div>
+
+</div>
+
+<audio id="music" loop>
+  <source src="ilmb.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const question = document.getElementById("question");
+const music = document.getElementById("music");
+
+let scale = 1;
+let messages = [
+  "Are you sure about that? 😏",
+  "You might regret this 😝",
+  "Think again 😅",
+  "Maybe give it another thought? 🥹",
+  "Don’t say no so fast 🥲",
+  "Pleaseeee 😭",
+  "Ứ chịu đâuuuuuu 🤪",
+  "Trùm bao bố ny luôn 😎"
+];
+
+let i = 0;
+
+// 😈 NO chạy (không out màn hình)
+noBtn.addEventListener("mouseover", () => {
+  const btnWidth = noBtn.offsetWidth;
+  const btnHeight = noBtn.offsetHeight;
+
+  const x = Math.random() * (window.innerWidth - btnWidth);
+  const y = Math.random() * (window.innerHeight - btnHeight);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+
+  if (i < messages.length) {
+    question.innerText = messages[i];
+    i++;
+  }
+
+  scale += 0.2;
+  yesBtn.style.transform = "scale(" + scale + ")";
+});
+
+// 💘 YES
+function accept() {
+
+  music.volume = 0.6;
+  music.play();
+
+  question.innerHTML = "YEAHHH 😍🥰😘";
+  question.classList.add("success");
+
+  document.getElementById("text").innerHTML = "Mission successful 😎";
+
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
+  document.getElementById("gif").style.display = "block";
+
+  setInterval(createHeart, 250);
+  setTimeout(typeWriter2, 3000);
+}
+
+// 💖 tim
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}
+
+// ✍️ text cuối
+const message2 = "So... pick u up at 6 tomorrow nhé 😘";
+let j = 0;
+
+function typeWriter2() {
+  const el = document.getElementById("text2");
+  el.style.opacity = 1;
+
+  if (j < message2.length) {
+    el.innerHTML += message2.charAt(j);
+    j++;
+    setTimeout(typeWriter2, 50);
+  }
+}
+</script>
+
+</body>
+</html>
