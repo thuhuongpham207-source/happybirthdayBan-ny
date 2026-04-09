@@ -136,27 +136,15 @@
 document.getElementById("text").innerHTML =
   "Mission successful 😎";
 
-  // 🎵 NHẠC + FADE IN (FIX AUTOPLAY)
-  const music = document.getElementById("music");
+// 🎵 NHẠC (FIX MOBILE)
+const music = document.getElementById("music");
 
-  if (localStorage.getItem("playMusic") === "true") {
+if (localStorage.getItem("playMusic") === "true") {
+
+  document.body.addEventListener("click", () => {
 
     music.volume = 0;
-
-    // thử autoplay
-    setTimeout(() => {
-      music.play().catch(() => {});
-    }, 300);
-
-    // fake interaction để browser cho phép
-    window.addEventListener("load", () => {
-      document.body.click();
-    });
-
-    // fallback click
-    document.body.addEventListener("click", () => {
-      music.play();
-    }, { once: true });
+    music.play();
 
     // fade in
     let vol = 0;
@@ -168,8 +156,10 @@ document.getElementById("text").innerHTML =
         clearInterval(fade);
       }
     }, 200);
-  }
 
+  }, { once: true });
+
+}
   // 💖 TIM BAY
   function createHeart() {
     const heart = document.createElement("div");
