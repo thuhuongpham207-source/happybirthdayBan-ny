@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>You & Me on 11/04? 😘</title>
+
+<style>
+  body {
+    background: #ffe6eb;
+    text-align: center;
+    font-family: Arial;
+    overflow: hidden;
+  }
+
+  h1 {
+    margin-top: 100px;
+    font-size: 38px;
+  }
+
+  .btn {
+    padding: 15px 25px;
+    font-size: 18px;
+    margin: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  #yes {
+    background: #ff4d6d;
+    color: white;
+  }
+
+  #no {
+    background: white;
+    position: absolute;
+  }
+</style>
+</head>
+
+<body>
+
+<h1 id="question">Do you wanna go out with meee? 😉</h1>
+
+<button class="btn" id="yes" onclick="goYes()">Yes 😍</button>
+<button class="btn" id="no">No 🙂‍↔️</button>
+
+<script>
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const question = document.getElementById("question");
+
+  let scale = 1;
+  let messages = [
+    "Are you sure about that? 😏",
+    "You might regret this 😝",
+    "Think again 😅",
+    "Maybe give it another thought? 🥹",
+    "Don’t say no so fast 🥲",
+    "Pleaseeee 😭",
+    "Ứ chịuuuuu 🤪",
+    "Trùm bao bố ny luôn 😎"
+  ];
+
+  let i = 0;
+
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    if (i < messages.length) {
+      question.innerText = messages[i];
+      i++;
+    }
+
+    scale += 0.2;
+    yesBtn.style.transform = "scale(" + scale + ")";
+  });
+
+
+function goYes() {
+  localStorage.setItem("playMusic", "true");
+  window.location.href = "yes.html";
+}
+</script>
+</body>
+</html>
